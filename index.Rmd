@@ -50,6 +50,7 @@ qrimg <- qrencoder::qrencode_png("https://scienceuntangled.github.io/scouting-an
 htmltools::tags$img(style = "background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;", src = qrimg, alt="qrcode")
 ```
 
+https://scienceuntangled.github.io/scouting-analytics-workshop/
 
 ---
 
