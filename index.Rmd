@@ -26,7 +26,7 @@ layout: true
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 options(knitr.kable.NA="")
-knitr::opts_chunk$set(fig.path = "extra/", echo = FALSE, warning = FALSE, message = FALSE,cache=FALSE, dpi = 120)
+knitr::opts_chunk$set(fig.path = "extra/", echo = FALSE, warning = FALSE, message = FALSE, cache = FALSE, dpi = 120)
 library(dplyr)
 library(formattable)
 library(ggplot2)
@@ -45,10 +45,17 @@ class: inverse
 
 With input from Mark Lebedew, Hugh Nguyen
 
-```{r qr}
-qrimg <- qrencoder::qrencode_png("https://scienceuntangled.github.io/scouting-analytics-workshop/")
-htmltools::tags$img(style = "background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;", src = qrimg, alt="qrcode")
+```{r qr, include = FALSE}
+##qrimg <- qrencoder::qrencode_png("https://scienceuntangled.github.io/scouting-analytics-workshop/")
+qrimg <- "extra/qrcode.png"
+png(filename = qrimg, width = 320, height = 320)
+library(qrcode)
+qrcode_gen("https://scienceuntangled.github.io/scouting-analytics-workshop/", plotQRcode = TRUE)
+dev.off()
+magick::image_write(magick::image_trim(magick::image_read(qrimg)), qrimg)
 ```
+
+<img style="background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;" src="extra/qrcode.png" alt="qrcode" />
 
 https://scienceuntangled.github.io/scouting-analytics-workshop/
 
@@ -368,9 +375,11 @@ Questions:
 Data:
 
 - who made the set if not the designated setter
-- outcome of the set (error or rating)
 - where the set was made from
+- outcome of the set (error or rating)
 - what set was made & where to (get this from attack)
+
+- (may not need to scout sets other than errors, if coach doesn't need the first two)
 
 ---
 
@@ -523,7 +532,7 @@ Option 2: alternatively, we could choose to scout *only unforced* defensive erro
 
   - e.g. VNL 2018, from pro scouts: only ~30% of attack kills had a corresponding dig error scouted
 
-  - then how do we know which defensive player was responsible? (See later)
+  - then how do we know which defensive player was responsible? (see later)
 
 ---
 
@@ -557,7 +566,7 @@ Relatively rare events are [generally not good indicators of underlying performa
 - error rate `N_errors / N_serves`
 
   - how to interpret a given error rate?
-  - how many service errors should we aim for?
+  - what service error rate should we aim for?
 
 ---
 
@@ -582,7 +591,7 @@ Relatively rare events are [generally not good indicators of underlying performa
 
 - expected breakpoint rate
 
-  - first look at league-wide breakpoint rate by serve rating, e.g. 2018 Women's AVL
+  - take league-wide breakpoint rate by serve rating, e.g. 2018 Women's AVL
 ```{r}
 format_table(tribble(~Evaluation, ~"Breakpoint rate",
                      "Error", 0,
@@ -634,11 +643,11 @@ Should it be "per *opposition attack faced by that player*"?
 
 - error rate `N_errors / N_passes`
 
-- perfect/positive pass rate `N_positive / N_passes`
+- perfect/positive pass rate `N_perfpos / N_passes`
 
 - pass efficiency
 
-  `(N_positive - N_errors - N_overpasses) / N_passes`
+  `(N_perfpos - N_errors - N_overpasses) / N_passes`
 
 - sideout rate `Points_won / N_passes`
 
@@ -648,7 +657,7 @@ Should it be "per *opposition attack faced by that player*"?
 
 - expected sideout rate
 
-  `[(N_positive * positive_sideout_rate) + (N_OK * OK_sideout_rate) + (N_poor * poor_sideout_rate) + (N_errors * error_sideout_rate)] / N_passes`
+  `[(N_perfpos * perfpos_sideout_rate) + (N_OK * OK_sideout_rate) + (N_poor * poor_sideout_rate) + (N_errors * error_sideout_rate)] / N_passes`
 
   - league-wide sideout rate by pass rating, 2019 Men's Volleyball Nations League
 
@@ -669,13 +678,7 @@ format_table(tribble(~Evaluation, ~"Sideout rate",
 
 - error rate, kill rate
 - efficiency
-- "efficiency plus one" [    ##    nts_attack_or_freeball (they got an attack or freeball attempt)
-    ##    nts_eff_num (kill-error-block)
-    ## NB nts_attack_or_freeball is redundant? because nts_eff_num will always be zero when this is FALSE?
-    ##    but let's leave it in for now
-    x %>% dplyr::filter(.data$skill %eq% "Attack") %>% group_by_at(grps) %>%
-        dplyr::summarize(attack_plus1_efficiency = (sum(.data$evaluation %eq% "Winning attack")-sum(.data$evaluation %in% c("Error", "Blocked"))-
-     sum(.data$nts_attack_or_freeball*.data$nts_eff_num))/n())
+- "efficiency plus one" (efficiency but also taking into account the opposition's answering attack)
 
 ---
 
@@ -683,21 +686,41 @@ format_table(tribble(~Evaluation, ~"Sideout rate",
 
 - adjusted for opportunity (https://untan.gl/adjusted-attack-indicators.html)
 
+```{r}
+format_table(tribble(~Attack, ~Phase, ~"Kill rate",
+                     "High 4", "Reception", 0.312,
+                     "High 4", "Transition", 0.322,
+                     "Fast 4", "Reception", 0.514,
+                     "Fast 4", "Transition", 0.459,
+                     "Pipe", "Reception", 0.633,
+                     "Pipe", "Transition", 0.563))
+```
+
+---
+
+# Performance indicators &mdash; attacking
+
+- adjusted individual attack stats using those differences
+
 <img class="centred" style="max-height:400px;" src="https://untan.gl/adjusted-attack-indicators_files/figure-html/alldatplot-1.png" />
 
 ---
 
 # Performance indicators &mdash; blocking
 
-- direct measures: kill block rate, touch rate
+Direct measures:
+- block rate `N_blocks / N_opposition_attacks`
+- touch rate `(N_blocks + N_touches) / N_opposition_attacks`
 
-  - multiple players in block, shared credit
-- participation rate (esp for middles)
+  - when multiple players in block, also look at shared credit for blocks and touches
+- participation rate (especially for middles) `N_block_attempts / N_opposition_attacks`
 
-  - blocking when we should not be? (Opposition freeballs?)
+- blocking when we should not be? (Opposition freeballs?)
+
 - other effects on play
 
   - opposition attack statistics when blocker is front row
+  - opposition setter choices when blocker is front row
 
 ---
 
@@ -728,13 +751,15 @@ From https://untan.gl/comparing-setters-implications.html
 
 # Performance indicators &mdash; defence and freeball digs
 
-- digs
+- dig rate
+  `N_digs / N_opposition_attacks (excluding blocked/errors)`
 
 - defence more broadly
 
-  - ATT/D
-  - attacks without any dig touch
-
+  - ATT/D ([attacks per defensive opportunity](https://marklebedew.com/2018/02/10/measuring-team-defence/))
+  - (similarly, kills per defensive opportunity, which additionally reflects transition offence)
+  - opposition kill rate
+  
 ---
 
 # Defensive responsibility

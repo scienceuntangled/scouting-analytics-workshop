@@ -28,7 +28,9 @@ class: inverse
 
 With input from Mark Lebedew, Hugh Nguyen
 
-<img style="background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAAAAAByj52zAAAACXBIWXMAAC4jAAAuIwF4pT92AAABGUlEQVQ4jW2T2XLAMAgDVxn//y9vHzjsaetMEnwAQsIRAGLaoo2d218FQUR9dj5mIYBGCBHpnY93JBLhpoRztyUSxXAPcCr8fHGMzNqZ44YYI6bsNxCwtShd1GCjHGMqkNe74H6kMbZrDGaoChwJ6TrIcHsJbuSma5A//+K7YCr//BtX5S7jV5iRbdRq8Z5IX1WWpNRaajtQ/BoLnWae5+DQp6P48ntzFtVuG60TCqc0o2nKKtHqmqIzzenTOTUnvhkGYyNpu2Vt56lwhfLRNmV0K41e7eMSMRUvzU4ndNLWvrN07AF/pTPba4Vu79wWsXblP6PSbaV1qrE3ypi+kA/D9bo9tSy9KtctGCGq6VsUr0RPLfd1Dv4A1YYnqd3bzdgAAAAASUVORK5CYII=" alt="qrcode"/>
+
+
+&lt;img style="background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;" src="extra/qrcode.png" alt="qrcode" /&gt;
 
 https://scienceuntangled.github.io/scouting-analytics-workshop/
 
@@ -348,9 +350,11 @@ Questions:
 Data:
 
 - who made the set if not the designated setter
-- outcome of the set (error or rating)
 - where the set was made from
+- outcome of the set (error or rating)
 - what set was made &amp; where to (get this from attack)
+
+- (may not need to scout sets other than errors, if coach doesn't need the first two)
 
 ---
 
@@ -503,7 +507,7 @@ Option 2: alternatively, we could choose to scout *only unforced* defensive erro
 
   - e.g. VNL 2018, from pro scouts: only ~30% of attack kills had a corresponding dig error scouted
 
-  - then how do we know which defensive player was responsible? (See later)
+  - then how do we know which defensive player was responsible? (see later)
 
 ---
 
@@ -537,7 +541,7 @@ Relatively rare events are [generally not good indicators of underlying performa
 - error rate `N_errors / N_serves`
 
   - how to interpret a given error rate?
-  - how many service errors should we aim for?
+  - what service error rate should we aim for?
 
 ---
 
@@ -562,7 +566,7 @@ Relatively rare events are [generally not good indicators of underlying performa
 
 - expected breakpoint rate
 
-  - first look at league-wide breakpoint rate by serve rating, e.g. 2018 Women's AVL
+  - take league-wide breakpoint rate by serve rating, e.g. 2018 Women's AVL
 &lt;table class="table table-condensed"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
@@ -635,11 +639,11 @@ Should it be "per *opposition attack faced by that player*"?
 
 - error rate `N_errors / N_passes`
 
-- perfect/positive pass rate `N_positive / N_passes`
+- perfect/positive pass rate `N_perfpos / N_passes`
 
 - pass efficiency
 
-  `(N_positive - N_errors - N_overpasses) / N_passes`
+  `(N_perfpos - N_errors - N_overpasses) / N_passes`
 
 - sideout rate `Points_won / N_passes`
 
@@ -649,7 +653,7 @@ Should it be "per *opposition attack faced by that player*"?
 
 - expected sideout rate
 
-  `[(N_positive * positive_sideout_rate) + (N_OK * OK_sideout_rate) + (N_poor * poor_sideout_rate) + (N_errors * error_sideout_rate)] / N_passes`
+  `[(N_perfpos * perfpos_sideout_rate) + (N_OK * OK_sideout_rate) + (N_poor * poor_sideout_rate) + (N_errors * error_sideout_rate)] / N_passes`
 
   - league-wide sideout rate by pass rating, 2019 Men's Volleyball Nations League
 
@@ -694,13 +698,7 @@ Should it be "per *opposition attack faced by that player*"?
 
 - error rate, kill rate
 - efficiency
-- "efficiency plus one" [    ##    nts_attack_or_freeball (they got an attack or freeball attempt)
-    ##    nts_eff_num (kill-error-block)
-    ## NB nts_attack_or_freeball is redundant? because nts_eff_num will always be zero when this is FALSE?
-    ##    but let's leave it in for now
-    x %&gt;% dplyr::filter(.data$skill %eq% "Attack") %&gt;% group_by_at(grps) %&gt;%
-        dplyr::summarize(attack_plus1_efficiency = (sum(.data$evaluation %eq% "Winning attack")-sum(.data$evaluation %in% c("Error", "Blocked"))-
-     sum(.data$nts_attack_or_freeball*.data$nts_eff_num))/n())
+- "efficiency plus one" (efficiency but also taking into account the opposition's answering attack)
 
 ---
 
@@ -708,21 +706,73 @@ Should it be "per *opposition attack faced by that player*"?
 
 - adjusted for opportunity (https://untan.gl/adjusted-attack-indicators.html)
 
+&lt;table class="table table-condensed"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Attack &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Phase &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Kill rate &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; High 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; Reception &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.312 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; High 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; Transition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.322 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; Fast 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; Reception &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.514 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; Fast 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; Transition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.459 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; Pipe &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; Reception &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.633 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; Pipe &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; Transition &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.563 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Performance indicators &amp;mdash; attacking
+
+- adjusted individual attack stats using those differences
+
 &lt;img class="centred" style="max-height:400px;" src="https://untan.gl/adjusted-attack-indicators_files/figure-html/alldatplot-1.png" /&gt;
 
 ---
 
 # Performance indicators &amp;mdash; blocking
 
-- direct measures: kill block rate, touch rate
+Direct measures:
+- block rate `N_blocks / N_opposition_attacks`
+- touch rate `(N_blocks + N_touches) / N_opposition_attacks`
 
-  - multiple players in block, shared credit
-- participation rate (esp for middles)
+  - when multiple players in block, also look at shared credit for blocks and touches
+- participation rate (especially for middles) `N_block_attempts / N_opposition_attacks`
 
-  - blocking when we should not be? (Opposition freeballs?)
+- blocking when we should not be? (Opposition freeballs?)
+
 - other effects on play
 
   - opposition attack statistics when blocker is front row
+  - opposition setter choices when blocker is front row
 
 ---
 
@@ -753,13 +803,15 @@ From https://untan.gl/comparing-setters-implications.html
 
 # Performance indicators &amp;mdash; defence and freeball digs
 
-- digs
+- dig rate
+  `N_digs / N_opposition_attacks (excluding blocked/errors)`
 
 - defence more broadly
 
-  - ATT/D
-  - attacks without any dig touch
-
+  - ATT/D ([attacks per defensive opportunity](https://marklebedew.com/2018/02/10/measuring-team-defence/))
+  - (similarly, kills per defensive opportunity, which additionally reflects transition offence)
+  - opposition kill rate
+  
 ---
 
 # Defensive responsibility
@@ -813,6 +865,12 @@ A brief overview of the apps available via https://apps.untan.gl/
 - https://apps.untan.gl/dvblock
 - https://apps.untan.gl/teamrep (see [example report](https://apps.untan.gl/reports/team_report_example-Skra_Belchatow.pdf))
 - https://apps.untan.gl/dvrr
+
+---
+
+# Using the online apps
+
+&lt;img class="centred" style="max-height:350px;" src="extra/volleyset-1.png" /&gt;
 
 ---
 
