@@ -48,11 +48,13 @@ With input from Mark Lebedew, Hugh Nguyen
 ```{r qr, include = FALSE}
 ##qrimg <- qrencoder::qrencode_png("https://scienceuntangled.github.io/scouting-analytics-workshop/")
 qrimg <- "extra/qrcode.png"
-png(filename = qrimg, width = 320, height = 320)
-library(qrcode)
-qrcode_gen("https://scienceuntangled.github.io/scouting-analytics-workshop/", plotQRcode = TRUE)
-dev.off()
-magick::image_write(magick::image_trim(magick::image_read(qrimg)), qrimg)
+if (!file.exists(qrimg)) {
+    png(filename = qrimg, width = 320, height = 320)
+    library(qrcode)
+    qrcode_gen("https://scienceuntangled.github.io/scouting-analytics-workshop/", plotQRcode = TRUE)
+    dev.off()
+    magick::image_write(magick::image_trim(magick::image_read(qrimg)), qrimg)
+}
 ```
 
 <img style="background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;" src="extra/qrcode.png" alt="qrcode" />
@@ -752,6 +754,7 @@ From https://untan.gl/comparing-setters-implications.html
 # Performance indicators &mdash; defence and freeball digs
 
 - dig rate
+
   `N_digs / N_opposition_attacks (excluding blocked/errors)`
 
 - defence more broadly
