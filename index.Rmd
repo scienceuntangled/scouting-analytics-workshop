@@ -60,6 +60,7 @@ https://scienceuntangled.github.io/scouting-analytics-workshop/
 - the process & principles
 - data collection, using VBStats
 - stats, performance indicators, interpretation
+- reports
 - other considerations
 
 ---
@@ -81,11 +82,11 @@ https://scienceuntangled.github.io/scouting-analytics-workshop/
 Experienced coaches can and do make many of these assessments by observation, but analysis can help because it is:
 
 - more objective
+- less prone to issues such as [confirmation bias](https://marklebedew.com/2019/09/15/timeouts-and-service-errors-a-cautionary-tale/) or a tendency to remember events that happened most recently at the expense of earlier events
 - provides quantitative assessments of performance, rather than qualitative ones
-- is less prone to issues such as [confirmation bias](https://marklebedew.com/2019/09/15/timeouts-and-service-errors-a-cautionary-tale/) or a tendency to remember events that happened most recently at the expense of earlier events
 - quicker if match data are already available
 - data can be collected once and analyzed in many ways
-- can help assesss facets of play that can't easily be isolated by observation alone.
+- can help assesss facets of play that can't easily be isolated by observation alone
 
 ---
 
@@ -103,7 +104,7 @@ Experienced coaches can and do make many of these assessments by observation, bu
 
    Often the end-users are coaches and players, but in other cases might be sponsors or the general public, and so the information and level of detail that is needed for one audience might not be appropriate for another.
 
-Parts 1 and 2 can be done on paper, but more commonly by computer.
+Parts 1 and 2 can be done on paper, or by computer.
 
 ---
 
@@ -119,9 +120,9 @@ We want to collect our raw data in such a way that they are:
 
 ---
 
-# Scouting &mdash; principles (2)
+# Scouting &mdash; principles
 
-- we want to **maximize the application of our data** (i.e. we can use the data for a range of things, rather than collecting data that can only be used for just one purpose). In particular we want to keep our options reasonably open for answering questions that we haven't thought of yet.
+- we want to **maximize the application of our data** (i.e. we can use the data for a range of things, rather than collecting data that can only be used for just one purpose). Ideally we want to keep our options reasonably open for answering questions that we haven't thought of yet.
 
 - but we also want to be **efficient**, by balancing the demands on the scout against the value of the information that we ask them to collect. Every extra detail that we ask them to scout adds effort: does that extra detail actually give us valuable information? Can we avoid scouting it manually because it can be inferred or filled in automatically later?
 
@@ -129,17 +130,11 @@ We want to collect our raw data in such a way that they are:
 
 ---
 
-# Scouting &mdash; objectivity
+# Scouting &mdash; principles
 
-There is a distinction between the ***data being scouted*** and the ***information that can be extracted from those data***. In some cases these are effectively equivalent &mdash; e.g. serve aces.
+There is a distinction between the **data being scouted** and the **information that can be extracted from those data**. In some cases these are effectively equivalent &mdash; e.g. serve aces.
 
-But in other cases the information that we want to report isn't directly obvious in the data that we are collecting, and some further analysis might be required to extract it &mdash; e.g. errors.
-
-https://marklebedew.com/2018/12/28/when-is-an-error-not-an-error/
-
-> Creating an equivalence between a rotation error or a net touch with a receiver who can’t control a Leon serve [hard jump serve] is not fair for the player, nor is it an accurate reflection of the game that is happening.  By all means call it a reception "attempt", but it is not a reception "error".
-
-This is about interpretation, not raw data. We'll explore this in more detail later.
+But in other cases the information that we want to report isn't directly obvious in the data that we are collecting, and some further analysis might be required to extract it &mdash; e.g. defensive performance.
 
 ---
 
@@ -218,8 +213,8 @@ Data:
 
 Performance indicators:
 
-- ace rate, error rate, efficiency, breakpoint rate
-- patterns with opposition rotation, scores, game history
+- ace rate, error rate, efficiency
+- breakpoint rate, expected breakpoint rate
 
 ---
 
@@ -286,6 +281,8 @@ Performance indicators:
 
 # Attacking
 
+<div style="float:right;clear:none;width:30%;"><video type="video/mp4" src = "extra/holt.mp4" loop autoplay /></div>
+
 Intent (attack vs freeball)
 
 Questions:
@@ -298,24 +295,22 @@ Questions:
 
 Team attacking:
 
-- strategies? Combinations? (see under setting)
+- strategies?
 
 ---
 
 # Attacking
 
-<div style="float:right;clear:none;width:30%;"><video type="video/mp4" src = "extra/holt.mp4" loop autoplay /></div>
-
 Data:
 
-- outcome &mdash; errors, type of error, kills, attack type (set type/tempo)
+- attack type (set type/tempo), tip vs hit vs roll
+- outcome (error, type of error, kill, other)
 - ball path
 - number of blockers
 
 Performance indicators:
 
-- error rate, kill rate, efficiency, "efficiency plus one"
-- adjusted for opportunity
+- error rate, kill rate, efficiency
 
 ---
 
@@ -325,9 +320,16 @@ Performance indicators:
 
 Questions:
 
-- how good is a given blocker? Middles: ability to block middle and outside effectively, read opp attack, read vs commit
-- team: weaknesses in opp block, strategies (line vs cross)
-- own team block: weaknesses (to improve) and strengths (to utilize)
+Individual:
+
+- how good is a given blocker?
+- middles: read vs commit, ability to block middle and outside effectively
+- individual blocking characteristics?
+
+Team:
+
+- strategies (line vs cross), other patterns
+- weaknesses in block (susceptibility to certain attacks, attack combinations, or sequences?)
 
 ---
 
@@ -335,13 +337,15 @@ Questions:
 
 Data:
 
-- blocks, touches
-- block participation (i.e. number of blockers: we can infer who they were later)
+- block kills, errors
+- touches (but get this from attack action)
+- number of blockers (also from attack action)
+- block direction (if software supports it)
 
 Performance indicators:
 
 - block rate, touch rate
-- other effects on play
+- other effects on play (opposition attack stats, opposition setter choices)
 
 ---
 
@@ -372,7 +376,8 @@ Data:
 
 # Freeballs
 
-- outcome, ball path
+- basically as for attacking
+- data: outcome, ball path
 
 ---
 
@@ -393,7 +398,7 @@ Questions:
 
 Data:
 
-- errors?
+- digs, errors (but see later)
 
 ---
 
@@ -402,12 +407,24 @@ Data:
 Remember **objectivity** and the distinction between the **data** and the **information that we generate from those data**.
 
 - if we scout something as an error, we don't necessarily have to treat it as such in analysis (and don't have to treat all errors equally)
-- if we don't scout an error, we might have missing information that we can't recover later
+- if we don't scout an error action, we might have missing information that we can't recover later
 
 - generally:
 
   - record all errors
   - assign each to the player who had most responsibility for it
+
+---
+
+# Errors
+
+Data vs information:
+
+https://marklebedew.com/2018/12/28/when-is-an-error-not-an-error/
+
+> Creating an equivalence between a rotation error or a net touch with a receiver who can’t control a Leon serve [hard jump serve] is not fair for the player, nor is it an accurate reflection of the game that is happening.  By all means call it a reception "attempt", but it is not a reception "error".
+
+This is about interpretation, not raw data.
 
 ---
 
@@ -433,7 +450,7 @@ Remember **objectivity** and the distinction between the **data** and the **info
 
 - direct errors by the attacker (net violation, reach, hit out, hit into the net, back-row attacker inside the 3m line, etc) should be scouted as attack errors
 - blocked attacks are not usually considered to be errors for the purposes of *analysis*, but with some scouting software they must be *scouted* as errors (e.g. in VBStats a blocked attack must be entered as an error, with reason "blocked")
-- a very poor set is probably not an attack error (e.g. an unhittable, mis-timed quick set), but this may be subjective
+- an error on a very poor set is probably not an attack error (e.g. an unhittable, mis-timed quick set), but this may be subjective
 
 ---
 
@@ -444,7 +461,8 @@ Remember **objectivity** and the distinction between the **data** and the **info
 
 Can be subjective:
 
-- a poor set that the attacker tried to save, but contacted the net in doing so. Whose error? (Assign the error to whichever player you think was most at fault)
+- a poor (nearly unsettable) pass called for double contact (assign the error to whichever player you think was most at fault)
+- a poor set that the attacker tried to save, but contacted the net in doing so (assign the error to whichever player you think was most at fault)
 - a set that goes to an attacker who is out of position and makes an error in attempting to hit it (probably scout as attacker error)
 - a set that goes to an attacker with 3 blockers when another attacker is entirely open, and the point is lost on that attack (do not scout as a set error)
 
@@ -455,7 +473,7 @@ Can be subjective:
 - only scout direct errors by the blocking player (net violation, reach, catch, back-row player blocking, etc)
 - an attack hit that goes off the block for a kill is not scouted as a block error (should be scouted as "off-block" attack)
 
-A blocker who is out of position and fails to block, leading to an attack kill is not scouted as an error, even though it might be considered to be one by many coaches. In our downstream analyses, we can get insights into blocker position by other means, so we keep the scouting of "block errors" for direct (unforced) blocking errors.
+A blocker who is out of position and fails to block, leading to an attack kill is not scouted as an error, even though it might be considered to be one by many coaches. In our downstream analyses, we can get insights into blocker position by other means, so we keep the scouting of "block errors" for direct blocking errors.
 
 ---
 
@@ -471,7 +489,7 @@ A blocker who is out of position and fails to block, leading to an attack kill i
 - forced errors often not so clear
 
   - error digging a hard attack hit
-  - clean kill with no touch
+  - error defending the defensive weak zone
 
 ---
 
@@ -503,7 +521,7 @@ Option 2: alternatively, we could choose to scout *only unforced* defensive erro
 
 - this is not consistent across the community
 
-  - e.g. VNL 2018, from pro scouts: ~30% of attack kills had a corresponding dig error scouted
+  - e.g. VNL 2018, from pro scouts: only ~30% of attack kills had a corresponding dig error scouted
 
   - then how do we know which defensive player was responsible? (See later)
 
@@ -600,6 +618,18 @@ Should it be "per *opposition attack faced by that player*"?
 
 ---
 
+# Performance indicators &mdash; serving (and other skills)
+
+- patterns with:
+
+  - opposition rotation
+  - scores
+  - game situation
+  - players on court
+  - and more
+
+---
+
 # Performance indicators &mdash; reception
 
 - error rate `N_errors / N_passes`
@@ -637,8 +667,23 @@ format_table(tribble(~Evaluation, ~"Sideout rate",
 
 # Performance indicators &mdash; attacking
 
-- error rate, kill rate, efficiency, "efficiency plus one"
-- adjusted for opportunity
+- error rate, kill rate
+- efficiency
+- "efficiency plus one" [    ##    nts_attack_or_freeball (they got an attack or freeball attempt)
+    ##    nts_eff_num (kill-error-block)
+    ## NB nts_attack_or_freeball is redundant? because nts_eff_num will always be zero when this is FALSE?
+    ##    but let's leave it in for now
+    x %>% dplyr::filter(.data$skill %eq% "Attack") %>% group_by_at(grps) %>%
+        dplyr::summarize(attack_plus1_efficiency = (sum(.data$evaluation %eq% "Winning attack")-sum(.data$evaluation %in% c("Error", "Blocked"))-
+     sum(.data$nts_attack_or_freeball*.data$nts_eff_num))/n())
+
+---
+
+# Performance indicators &mdash; attacking
+
+- adjusted for opportunity (https://untan.gl/adjusted-attack-indicators.html)
+
+<img class="centred" style="max-height:400px;" src="https://untan.gl/adjusted-attack-indicators_files/figure-html/alldatplot-1.png" />
 
 ---
 
@@ -648,9 +693,11 @@ format_table(tribble(~Evaluation, ~"Sideout rate",
 
   - multiple players in block, shared credit
 - participation rate (esp for middles)
+
+  - blocking when we should not be? (Opposition freeballs?)
 - other effects on play
 
-  - win rate when that blocker is front row
+  - opposition attack statistics when blocker is front row
 
 ---
 
@@ -723,6 +770,8 @@ Could the extra information change our perception of defenders?
 
 # Performance indicators &mdash; freeballs
 
+- where are we putting our freeballs
+
 ---
 
 # VBStats reports
@@ -734,6 +783,17 @@ A brief overview of the reports available via VBStats.
 # Using the online apps
 
 A brief overview of the apps available via https://apps.untan.gl/
+
+- https://apps.untan.gl/volleyset
+- https://apps.untan.gl/dvblock
+- https://apps.untan.gl/teamrep (see [example report](https://apps.untan.gl/reports/team_report_example-Skra_Belchatow.pdf))
+- https://apps.untan.gl/dvrr
+
+---
+
+# Using the online apps
+
+<img class="centred" style="max-height:350px;" src="extra/volleyset-1.png" />
 
 ---
 
