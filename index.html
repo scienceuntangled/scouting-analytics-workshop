@@ -165,19 +165,7 @@ From here onwards we'll focus on scouting via VBStats, but the same principles a
 
 ---
 
-# Analysis
-
-Once we have our play-by-play data, we want to generate actionable information. Some options:
-
-1. scouting packages generally have analytical capability. This is convenient, but may be limited or difficult to customise.
-
-2. export the data from the scouting software to use elsewhere, such as [this suite of online analytical apps](https://apps.untan.gl/).
-
-   These apps work with files scouted in DataVolley or VBStats and provide analytical capability that complements or improves on the inbuilt analytical capabilities of those packages.
-
----
-
-# Analysis
+# Scouting
 
 - what might we want to know about a particular skill/facet of the game?
 
@@ -304,7 +292,7 @@ Data:
 - attack type (set type/tempo), tip vs hit vs roll
 - outcome (error, type of error, kill, other)
 - ball path
-- number of blockers
+- number of blockers (and did the attack come off the block)
 
 Performance indicators:
 
@@ -338,7 +326,7 @@ Data:
 - block kills, errors
 - touches (but get this from attack action)
 - number of blockers (also from attack action)
-- block direction (if software supports it)
+- block direction (line/cross - if software supports it)
 
 Performance indicators:
 
@@ -539,6 +527,18 @@ Option 2: alternatively, we could choose to scout *only unforced* defensive erro
 
 ---
 
+# Analysis
+
+Once we have our play-by-play data, we want to generate actionable information. Some options:
+
+1. scouting packages generally have analytical capability. This is convenient, but may be limited or difficult to customise.
+
+2. export the data from the scouting software to use elsewhere, such as [this suite of online analytical apps](https://apps.untan.gl/).
+
+   These apps work with files scouted in DataVolley or VBStats and provide analytical capability that complements or improves on the inbuilt analytical capabilities of those packages.
+
+---
+
 # Performance indicators &amp;mdash; serving
 
 - ace rate `N_aces / N_serves`
@@ -627,15 +627,24 @@ Rates (like, `number of successes / number of attempts`) are generally more mean
 
 Which would you rate higher: a spiker who had 20 kills (from 100 attempts) or one who had 10 kills (from 10 attempts)?
 
-BUT be careful that `number of attempts` is a consistent measure of opportunity across players/teams
+BUT be careful that `number of attempts` is what you think it is.
+
+- e.g. if you don't scout all attacks by a player (including non-terminal attacks in transition) then you can't calculate their attack kill rate because you don't know their `number of attempts`
+
+---
+
+class: digression
+
+# Another aside
+
+Also, to compare players/teams, `number of attempts` needs to be a consistent measure of opportunity across players/teams
 
 [FIVB](http://www.fivb.org/en/volleyball/VIS.asp):
 
 &gt; Top Blocker: The player with the most kill blocks on average per set played by the team.
 
 &lt;br /&gt;
-
-Should it be "per *opposition attack faced by that player*"?
+This tells us something about the blocker who made the largest overall contribution in terms of points per set, but it may not be the blocker who got the most blocks relative to their time on court. Should it be per set played *by that player*? Per *opposition attack faced by that player*?
 
 ---
 
