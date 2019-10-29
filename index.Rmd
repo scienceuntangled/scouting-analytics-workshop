@@ -41,9 +41,8 @@ class: inverse
 
 # Volleyball scouting and analytics
 
-### Ben Raymond, Adrien Ickowicz
-
 https://scienceuntangled.github.io/scouting-analytics-workshop/
+
 
 ```{r qr, include = FALSE}
 ##qrimg <- qrencoder::qrencode_png("https://scienceuntangled.github.io/scouting-analytics-workshop/")
@@ -59,13 +58,15 @@ if (!file.exists(qrimg)) {
 
 <img style="background: white; padding:10px; float:right;clear:none; margin:20px; width:30%; image-rendering: crisp-edges;" src="extra/qrcode.png" alt="qrcode" />
 
+### Ben Raymond, Adrien Ickowicz
+
 With input from Mark Lebedew, Hugh Nguyen
 
 <br />
 
-And support from Perana Sports
+Software support from Perana Sports
 
-<img style="float:left;clear:none; width:15%;" src="extra/perana-sports-logo.jpg" alt="Perana Sports logo" />
+<img style="float:left;clear:none; width:20%;" src="extra/perana.png" alt="Perana Sports logo" />
 
 
 ---
@@ -844,16 +845,10 @@ A brief overview of the reports available via VBStats.
 
 A brief overview of the apps available via https://apps.untan.gl/
 
-- https://apps.untan.gl/volleyset
-- https://apps.untan.gl/dvblock
+- https://apps.untan.gl/volleyset - examine setter distributions
+- https://apps.untan.gl/dvblock - blocking reports
 - https://apps.untan.gl/teamrep (see [example report](https://apps.untan.gl/reports/team_report_example-Skra_Belchatow.pdf))
-- https://apps.untan.gl/dvrr
-
----
-
-# Using the online apps
-
-<img class="centred" style="max-height:350px;" src="extra/volleyset-1.png" />
+- https://apps.untan.gl/dvrr - interactive analyses and exploration of your data
 
 ---
 
