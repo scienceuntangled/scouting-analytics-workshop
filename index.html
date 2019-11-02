@@ -151,9 +151,10 @@ General progression:
 
 Our conventions:
 
+- always scout using the two-team scouting interface
 - from video: scout both teams, all touches but not sets (unless errors)
 - live scouting: scout both teams, but only serve, reception, first attack, and the action that ended the rally
-- friendly/prep matches: scout one team
+- friendly/prep matches: scout both teams, but not all actions of the opposition team
 
 (But note that these are still evolving!)
 
@@ -645,7 +646,7 @@ class: digression
 
 # Another aside
 
-Also, to compare players/teams, `number of attempts` needs to be a consistent measure of opportunity across players/teams
+Also, to compare players/teams, `number of attempts` needs to be a consistent measure of opportunity across those players/teams.
 
 [FIVB](http://www.fivb.org/en/volleyball/VIS.asp):
 
@@ -731,7 +732,9 @@ This tells us something about the blocker who made the largest overall contribut
 
 - error rate, kill rate
 - efficiency
-- "efficiency plus one" (efficiency but also taking into account the opposition's answering attack)
+- "efficiency plus one" or "true efficiency" (efficiency but also taking into account the opposition's answering attack)
+
+  `(number of kills - number of errors and blocked attacks - (opponent next swing kill - opponent next swing errors and blocked attacks))/(number of attacks)`
 
 ---
 
