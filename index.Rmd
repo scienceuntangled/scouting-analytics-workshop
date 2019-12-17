@@ -543,7 +543,7 @@ Option 2: alternatively, we could choose to scout *only unforced* defensive erro
 
 - my preference: option 1. Scout all as errors.
 
-- this is not consistent across the community
+- but note that this is not consistent across the community
 
   - e.g. VNL 2018, from pro scouts: only ~30% of attack kills had a corresponding dig error scouted
 
@@ -594,6 +594,7 @@ Relatively rare events are [generally not good indicators of underlying performa
 
   - how to interpret a given error rate?
   - what service error rate should we aim for?
+  - (it depends on the team and level of competition)
 
 ---
 
@@ -824,14 +825,6 @@ Fit multinomial model:
 
 ---
 
-# Defensive responsibility
-
-Could the extra information change our perception of defenders?
-
-<img class="centred" style="max-height:350px;" src="extra/defensive_X5_comparison.png" />
-
----
-
 # Performance indicators &mdash; freeballs
 
 - where are we putting our freeballs
@@ -886,16 +879,6 @@ We need to take care required in interpreting numbers, because nearly everything
 - an attacker's success will be affected by their setter, and the strength of the defending team
 
 Advanced statistical models can help unpick some of these. But some dependencies may not be so obvious, or may be difficult to correct for, particularly if data are limited (and they always are).
-
-Serves are in principle entirely under the control of the server. Can the opposition affect serve performance?
-
----
-
-# Things are intertwingled
-
-Serve errors
-
-<img class="centred" style="max-height:400px;" src="extra/opp_serve_err_v_rank.png" />
 
 ---
 
